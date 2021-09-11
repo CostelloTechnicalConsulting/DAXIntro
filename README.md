@@ -6,7 +6,7 @@
 
     git clone https://github.com/CostelloTechnicalConsulting/DAXIntro.git c:\Coursefiles\DAXIntro
 
-(If you don't have the git command line tool, you can download and install from here: https://git-scm.com/download/win
+(If you don't have the git command line tool, you can download and install from here: https://git-scm.com/download/win)
 
 Afterwards, to update just doubleclick the batch file in the DAXIntro directory entitled UpdateFromGitHub.cmd
 
