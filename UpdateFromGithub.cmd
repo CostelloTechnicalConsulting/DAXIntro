@@ -1,5 +1,5 @@
 :: Update from GitHub
 
-git fetch
+git fetch --all
 get reset --hard HEAD
 git merge
