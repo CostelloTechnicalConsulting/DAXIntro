@@ -1,0 +1,44 @@
+** This file contains code snippets for the Introduction to Data Analysis Expressions labs **
+
+**********************
+Lab 1: What is DAX?
+Exercise 1: Create calculated columns
+
+
+Exercise 2: Create calculated measures
+Exercise 3: Create calculated tables
+Exercise 4: Test your calculations
+
+**********************
+Lab 2: Performing Basic Calculations
+Exercise 1: Work with mathematical operations
+Exercise 2: Working with text calculations
+Exercise 3: Working with dates and times
+Exercise 4: Working with logic
+
+**********************
+Lab 3: Working with context in the data model
+Exercise 1: Creating a data model with a star schema
+Exercise 2: Enhance the data model with measures
+
+**********************
+Lab 4: Performing more advanced calculations
+Exercise 1: Work with errors in data
+Exercise 2: Using iterator functions
+Exercise 3: Using table manipulation functions
+Exercise 4: Get started with DAX Studio
+
+**********************
+Lab 5: Working with time
+Exercise 1: Performing date calculations
+Exercise 2: Working with date tables
+Exercise 3: Working with to-date calculations
+Exercise 4: Finding year-over-year change
+Exercise 5: Finding moving averages
+
+**********************
+Lab 6: Enhancing the user experience
+Exercise 1: Controlling visibility of your measures
+Exercise 2: Using What-if parameters
+Exercise 3: Adding banding
+Exercise 4: Using DAX to provide row-level security
