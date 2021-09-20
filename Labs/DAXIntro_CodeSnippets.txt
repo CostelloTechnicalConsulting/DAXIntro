@@ -2,10 +2,35 @@
 
 **********************
 Lab 1: What is DAX?
+
 Exercise 1: Create calculated columns
 
+LineTotal = Sales[OrderQuantity] * Sales[UnitPrice]
+
+
+FullName = Customer[FirstName] & " " & Customer[LastName]
+
+
+Initials = LEFT( [FirstName], 1 ) & LEFT( [LastName], 1 )
+
+
+Approximate Age = QUOTIENT( INT( NOW() - Customer[BirthDate] ), 365.25 )
+
+
+Exact Age = 
+    /*
+    This column computes the customer's age by subtracting their birth year from the current year and then subtracting 1 if their birthday hasn't happened yet.
+    */
+    VAR ThisYear = YEAR( TODAY() ) // The current year
+    VAR BirthYear = YEAR( Customer[BirthDate] ) // Customer birth year
+    VAR ThisYearBirthday = DATE( ThisYear, MONTH( Customer[BirthDate] ), DAY( Customer[BirthDate] ) ) // Customer's birthday this year
+    VAR BDayHasHappened = IF( ThisYearBirthday <= TODAY(), 0, 1 ) // Return 0 if birthday is on or before today, 1 if it's after
+RETURN ( ThisYear - BirthYear ) - BDayHasHappened // This year - birth year. If birthday is after today, subtract 1.
 
 Exercise 2: Create calculated measures
+
+
+
 Exercise 3: Create calculated tables
 Exercise 4: Test your calculations
 
