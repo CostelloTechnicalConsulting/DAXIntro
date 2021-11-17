@@ -145,7 +145,7 @@ Age Group =
 >>Exercise 1: Creating a data model with a star schema
 ---------------------------------------------------------------------
 
-SalesPersonID = RELATED( Orders[SalespersonID] )
+SalespersonID = RELATED( Orders[SalespersonID] )
 
 
 OrderDate = RELATED( Orders[OrderDate] )
@@ -176,7 +176,7 @@ Profit = SUM( Sales[SaleTotal] ) - SUM( Sales[TotalCost] )
 August September Profit Delta = 
     VAR AugustProfit = CALCULATE( [Profit], MONTH( Sales[OrderDate] ) = 8 )
     VAR SeptemberProfit = CALCULATE( [Profit], MONTH( Sales[OrderDate] ) = 9 )
-RETURN SeptemberProfit – AugustProfit
+RETURN SeptemberProfit - AugustProfit
 
 
 ***************************
