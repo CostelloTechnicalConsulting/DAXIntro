@@ -271,7 +271,7 @@ RETURN IF( IsSunday || IsHoliday, 0, 1 )
 Daily Sales Average = 
     VAR TotalSales = SUM( Sales[SalesAmount] )
     VAR OperatingDaysInPeriod = SUM( 'Date'[OpenForBusiness] )
-RETURN DIVIDE( [Total Sales], OperatingDaysInPeriod )
+RETURN DIVIDE( TotalSales, OperatingDaysInPeriod )
 
 
 Week Of = 
@@ -370,6 +370,27 @@ Sales YoY Change % =
 RETURN IF( SalesPresent, YoYChange, BLANK() )
 
 
+Sales % of Parent = 
+    VAR AllSales = CALCULATE( [Total Sales], 
+        ALL( 'Product' ) )
+    VAR CategorySales = CALCULATE( [Total Sales], 
+        ALLEXCEPT( 'Product', 'Product'[Category] ) )
+    VAR SubcategorySales = CALCULATE( [Total Sales], 
+        ALLEXCEPT( 'Product', 'Product'[Category],
+        'Product'[Subcategory] ) )
+    VAR ModelSales = CALCULATE( [Total Sales], 
+        ALLEXCEPT( 'Product', 'Product'[Category],
+        'Product'[Subcategory], 'Product'[Model] ) )
+    VAR ParentSales = SWITCH( TRUE(),
+        ISINSCOPE( 'Product'[Product] ), ModelSales,
+        ISINSCOPE( 'Product'[Model] ), SubcategorySales,
+        ISINSCOPE( 'Product'[Subcategory] ), CategorySales,
+        ISINSCOPE( 'Product'[Category] ), AllSales,
+        AllSales )
+RETURN DIVIDE( [Total Sales], ParentSales )
+
+
+
 ---------------------------------------------------------------------
 >>Exercise 2: Using What-if parameters
 ---------------------------------------------------------------------
@@ -381,12 +402,13 @@ KPI Sales Goal = [PY Sales] * ( 1 + [KPI Target Increase Value] )
 >>Exercise 3: Adding banding
 ---------------------------------------------------------------------
 
-Calc Age Band = 
+Price Band = 
     VAR LowerBoundRow = TOPN( 1, 
-        FILTER( AgeBands, AgeBands[LowerBound] <= Customer[Exact Age] ),
-        AgeBands[LowerBound], DESC )
+        FILTER( PriceBands, PriceBands[LowerBound] <= 'Product'[ListPrice] ),
+        PriceBands[LowerBound], DESC )
     VAR BandName = MINX( LowerBoundRow, [BandName] )
 RETURN BandName
+
 
 
 ---------------------------------------------------------------------
