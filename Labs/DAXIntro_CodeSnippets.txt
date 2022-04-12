@@ -311,7 +311,7 @@ Profit by Due Date =
 ---------------------------------------------------------------------
 
 YTD Sales = 
-    TOTALYTD( Sales[Total Sales], 'Date'[FullDate] )
+    TOTALYTD( [Total Sales], 'Date'[FullDate] )
 
 
 Custom YTD Sales =
@@ -366,8 +366,9 @@ Sales YoY Change % =
         DATEADD( 'Date'[FullDate], -1, YEAR ) )
     VAR SalesDiff = [Total Sales] - PrevYearSales
     VAR YoYChange = DIVIDE( SalesDiff, PrevYearSales )
+    VAR NotTooHigh = YoYChange <= 5 // Should never exceed 500%
     VAR SalesPresent = NOT( ISBLANK( [Total Sales] ) )
-RETURN IF( SalesPresent, YoYChange, BLANK() )
+RETURN IF( NotTooHigh && SalesPresent, YoYChange, BLANK() )
 
 
 Sales % of Parent = 
@@ -397,6 +398,20 @@ RETURN DIVIDE( [Total Sales], ParentSales )
 
 KPI Sales Goal = [PY Sales] * ( 1 + [KPI Target Increase Value] )
 
+Sales param moving average = 
+    VAR NumberOfDaysToAverage = [Average Over Days Value]
+    VAR MaxDateCurrentSlice = MAX( 'Date'[FullDate] )
+    VAR MaxDateOffset = MaxDateCurrentSlice -NumberOfDaysToAverage
+    VAR TotalSalesInRange = CALCULATE( [Total Sales],
+        DATESBETWEEN( 'Date'[FullDate], MaxDateOffset, MaxDateCurrentSlice ) )
+    VAR AvgSales = DIVIDE( TotalSalesInRange, NumberOfDaysToAverage )
+RETURN IF( ISBLANK( [Total Sales] ), BLANK(), AvgSales )
+
+KPI Indicator = 
+    SWITCH( TRUE(),
+        Sales[Sales YoY Change %] >= [YoY Target Value], "CircleHigh",
+        Sales[Sales YoY Change %] >= [YoY Warning Value], "SignMedium",
+        "SignLow" )
 
 ---------------------------------------------------------------------
 >>Exercise 3: Adding banding
@@ -409,12 +424,8 @@ Price Band =
     VAR BandName = MINX( LowerBoundRow, [BandName] )
 RETURN BandName
 
-
-
 ---------------------------------------------------------------------
 >>Exercise 4: Using DAX to provide row-level security
 ---------------------------------------------------------------------
 
 [SalesPerson] = USERNAME()
-
-
