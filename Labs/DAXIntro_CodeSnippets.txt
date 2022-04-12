@@ -1,5 +1,7 @@
 ** This file contains code snippets for the Introduction to Data Analysis Expressions labs **
 
+###
+### 
 ***************************
 ***************************
 ** Lab 1: What is DAX?
@@ -58,6 +60,8 @@ RETURN FILTER( Promotion, Promotion[StartDate] >= DATE( MostRecentYear,1,1 ) )
 AgeTest = Customer[Approximate Age] = Customer[Exact Age]
 
 
+### ### 
+### ### 
 ***************************
 ***************************
 **Lab 2: Performing Basic Calculations
@@ -137,6 +141,8 @@ Age Group =
         "91 & Over" )
 
 
+### ### ###
+### ### ###
 ***************************
 ***************************
 **Lab 3: Working with context in the data model
@@ -179,6 +185,8 @@ August September Profit Delta =
 RETURN SeptemberProfit - AugustProfit
 
 
+### ### ### ###
+### ### ### ###
 ***************************
 ***************************
 **Lab 4: Performing more advanced calculations
@@ -235,8 +243,8 @@ RETURN UniqueRows
 
 Top 10 Products by Profit = 
     VAR SummarizedProduct = SUMMARIZE( 'Product', 'Product'[Product], 
-        "Total Product Sales", Sales[Total Sales], 
-        "Total Product Profit", Sales[Profit] )
+        "Total Product Sales", [Total Sales], 
+        "Total Product Profit", [Profit] )
     VAR Top10 = TOPN( 10, SummarizedProduct, [Total Product Profit] )
 RETURN Top10
 
@@ -254,6 +262,8 @@ Product With Highest List Price =
 
 (no code for this exercise)
 
+### ### ### ### ###
+### ### ### ### ###
 ***************************
 ***************************
 **Lab 5: Working with time
@@ -353,6 +363,8 @@ Sales 90 Day Moving Average =
 RETURN AvgSales
 
 
+### ### ### ### ### ###
+### ### ### ### ### ###
 ***************************
 ***************************
 **Lab 6: Enhancing the user experience
