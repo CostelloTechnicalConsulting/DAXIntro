@@ -421,7 +421,7 @@ Price Band =
     VAR LowerBoundRow = TOPN( 1, 
         FILTER( PriceBands, PriceBands[LowerBound] <= 'Product'[ListPrice] ),
         PriceBands[LowerBound], DESC )
-    VAR BandName = MINX( LowerBoundRow, [BandName] )
+    VAR BandName = MINX( LowerBoundRow, PriceBands[BandName] )
 RETURN BandName
 
 ---------------------------------------------------------------------
