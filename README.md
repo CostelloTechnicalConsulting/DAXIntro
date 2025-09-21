@@ -13,5 +13,5 @@ Afterwards, to update just doubleclick the batch file in the DAXIntro directory 
 If you'd like to run the update commands manually, they are (from the root directory):
 
     git fetch --all
-    get reset --hard HEAD
+    git reset --hard HEAD
     git merge
