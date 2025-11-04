@@ -1,0 +1,15 @@
+OrganizationKey,ParentOrganizationKey,PercentageOfOwnership,OrganizationName,CurrencyKey
+1,,1,AdventureWorks Cycle,100
+2,1.0,1,North America Operations,100
+3,14.0,1,Northeast Division,100
+4,14.0,1,Northwest Division,100
+5,14.0,1,Central Division,100
+6,14.0,1,Southeast Division,100
+7,14.0,1,Southwest Division,100
+8,2.0,.75,Canadian Division,19
+9,1.0,1,European Operations,36
+10,1.0,.75,Pacific Operations,6
+11,9.0,.50,France,36
+12,9.0,.25,Germany,36
+13,10.0,.50,Australia,6
+14,2.0,1,USA Operations,100
