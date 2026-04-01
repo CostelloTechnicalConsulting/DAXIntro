@@ -1,0 +1,31 @@
+﻿EVALUATE
+UNION (
+    SELECTCOLUMNS (
+        INFO.VIEW.MEASURES (),
+        "Object Type", "Measure",
+        "Table Name", [Table],
+        "Object Name", [Name],
+        "Data Type", [DataType],
+        "Description", [Description],
+        "Expression", [Expression]
+    ),
+    SELECTCOLUMNS (
+        FILTER (
+            INFO.VIEW.COLUMNS (),
+            [Type] = "Calculated" && 
+            // This line is to eliminate auto-generated date tables 
+            FIND (
+                "DateTable",
+                [Table],
+                1,
+                -1
+            ) = -1
+        ),
+        "Object Type", "Column",
+        "Table Name", [Table],
+        "Object Name", [Name],
+        "Data Type", [DataType],
+        "Description", [Description],
+        "Expression", [Expression]
+    )
+)
